@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RASTRO-GH · OSINT S3GAD3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0b0e11;
+    --paper: #e8e2d0;
+    --paper-dim: #d8d0b8;
+    --ink: #1a1a16;
+    --ink-dim: #5a5648;
+    --amber: #d99a3d;
+    --amber-dim: #8a6a34;
+    --teal: #4a9d8f;
+    --alert: #b8482f;
+    --line: #3a3f47;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    background:
+      radial-gradient(circle at 15% 10%, #12161c 0%, transparent 45%),
+      var(--bg);
+    color: var(--paper);
+    min-height: 100vh;
+    padding: 32px 16px 60px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrap { width: 100%; max-width: 640px; }
+
+  /* ---- HEADER / INSIGNIA ---- */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .badge {
+    flex-shrink: 0;
+    width: 56px; height: 56px;
+    position: relative;
+  }
+  .badge svg { width: 100%; height: 100%; }
+
+  .unit-text { flex: 1; }
+  .unit-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .unit-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+  }
+  .unit-name span { color: var(--teal); }
+
+  /* ---- TOOL TITLE ---- */
+  .tool-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    color: var(--paper);
+  }
+  .tool-sub {
+    font-size: 13px;
+    color: #8b8f96;
+    margin: 0 0 24px;
+    line-height: 1.5;
+  }
+
+  /* ---- CASE FILE CARD ---- */
+  .file {
+    position: relative;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 3px;
+    padding: 26px 24px 22px;
+    box-shadow: 0 20px 40px -12px rgba(0,0,0,0.6);
+  }
+
+  /* corner reticle marks */
+  .corner {
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: var(--ink);
+    opacity: 0.55;
+  }
+  .corner.tl { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
+  .corner.br { bottom: 8px; right: 8px; border-bottom: 2px solid; border-right: 2px solid; }
+
+  .file-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .input-group { display: flex; gap: 8px; margin-bottom: 16px; }
+  input {
+    flex: 1;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--paper-dim);
+    border-bottom: 2px solid var(--ink);
+    border-radius: 2px;
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+  }
+  input::placeholder { color: #9a927a; }
+  input:focus { outline: none; border-bottom-color: var(--teal); }
+
+  button {
+    padding: 12px 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button:hover:not(:disabled) { background: var(--teal); }
+  button:disabled { background: var(--paper-dim); color: var(--ink-dim); cursor: not-allowed; }
+
+  /* pipeline steps */
+  .pipeline {
+    display: flex;
+    gap: 0;
+    margin-bottom: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+  }
+  .step {
+    flex: 1;
+    padding: 6px 4px;
+    text-align: center;
+    color: var(--ink-dim);
+    border-bottom: 2px solid var(--paper-dim);
+    transition: all 0.2s;
+  }
+  .step.active { color: var(--ink); border-bottom-color: var(--amber); font-weight: 600; }
+  .step.done { color: var(--teal); border-bottom-color: var(--teal); }
+
+  .status { font-size: 12px; color: var(--ink-dim); margin-bottom: 12px; min-height: 16px; font-family: 'IBM Plex Mono', monospace; }
+
+  .profile { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 10px; background: rgba(0,0,0,0.04); border-radius: 3px; }
+  .profile img { width: 44px; height: 44px; border-radius: 3px; border: 1px solid var(--paper-dim); }
+  .profile .name { font-weight: 600; color: var(--ink); font-size: 14px; }
+  .profile .login { color: var(--ink-dim); font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
+
+  .result-box {
+    background: #0b0e11;
+    color: var(--paper);
+    border-radius: 3px;
+    padding: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    min-height: 60px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .empty-msg { color: #6b6f76; }
+
+  .hit {
+    display: block;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-left: 3px solid var(--teal);
+    background: rgba(74,157,143,0.08);
+    border-radius: 0 2px 2px 0;
+  }
+  .hit.noreply { border-left-color: #6b6f76; background: rgba(107,111,118,0.06); }
+  .hit .email { color: var(--paper); }
+  .hit.noreply .email { color: #9a9ea5; }
+  .hit .flag { color: var(--amber); font-size: 11px; }
+  .hit .source { display: block; font-size: 10.5px; color: #6b6f76; margin-top: 2px; }
+
+  .rate {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-dim);
+    margin-top: 14px;
+    text-align: right;
+  }
+
+  footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 11px;
+    color: #565a61;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="badge">
+      <svg viewBox="0 0 56 56" fill="none">
+        <circle cx="28" cy="28" r="26" stroke="#d99a3d" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="28" cy="28" r="20" stroke="#4a9d8f" stroke-width="1" opacity="0.5"/>
+        <path d="M28 10 L28 46 M10 28 L46 28" stroke="#d99a3d" stroke-width="0.75" opacity="0.35"/>
+        <text x="28" y="25" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#e8e2d0">OSINT</text>
+        <text x="28" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="700" fill="#d99a3d">S3GAD3</text>
+      </svg>
+    </div>
+    <div class="unit-text">
+      <div class="unit-eyebrow">Herramientas OSINT</div>
+      <div class="unit-name">OSINT <span>S3GAD3</span></div>
+    </div>
+  </header>
+
+  <h1 class="tool-title">RASTRO-GH</h1>
+  <p class="tool-sub">Localización de direcciones de correo asociadas a una cuenta de GitHub mediante fuentes públicas de la API (perfil, eventos y commits).</p>
+
+  <div class="file">
+    <div class="corner tl"></div>
+    <div class="corner br"></div>
+
+    <div class="file-label">
+      <span>Expediente · consulta OSINT</span>
+      <span id="caseId">REF: —</span>
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="username" placeholder="usuario de GitHub (ej. torvalds)" onkeydown="if(event.key==='Enter') searchEmail()">
+      <button id="searchBtn" onclick="searchEmail()">Buscar</button>
+    </div>
+
+    <div class="pipeline">
+      <div class="step" id="step1">1 · Perfil</div>
+      <div class="step" id="step2">2 · Eventos</div>
+      <div class="step" id="step3">3 · Commits</div>
+    </div>
+
+    <div id="status" class="status"></div>
+    <div id="profile"></div>
+    <div id="output" class="result-box"><span class="empty-msg">Introduce un usuario para iniciar la consulta...</span></div>
+    <div id="rate" class="rate"></div>
+  </div>
+
+  <footer>Solo consulta endpoints públicos de api.github.com · uso interno autorizado</footer>
+</div>
+
+<script>
+const btn = document.getElementById('searchBtn');
+const output = document.getElementById('output');
+const status = document.getElementById('status');
+const profileEl = document.getElementById('profile');
+const rateEl = document.getElementById('rate');
+const caseIdEl = document.getElementById('caseId');
+const steps = { 1: document.getElementById('step1'), 2: document.getElementById('step2'), 3: document.getElementById('step3') };
+
+function setStep(n, state) {
+  steps[n].classList.remove('active', 'done');
+  if (state) steps[n].classList.add(state);
+}
+function resetSteps() { [1,2,3].forEach(n => { steps[n].classList.remove('active','done'); }); }
+
+function updateRate(res) {
+  const remaining = res.headers.get('x-ratelimit-remaining');
+  const reset = res.headers.get('x-ratelimit-reset');
+  if (remaining !== null) {
+    const resetDate = reset ? new Date(parseInt(reset,10)*1000).toLocaleTimeString() : '?';
+    rateEl.textContent = `Rate limit restante: ${remaining} · reset ${resetDate}`;
+  }
+}
+
+function addEmail(map, email, source) {
+  if (!email) return;
+  if (!map.has(email)) map.set(email, new Set());
+  map.get(email).add(source);
+}
+
+async function searchEmail() {
+  const user = document.getElementById('username').value.trim();
+  if (!user) return;
+
+  btn.disabled = true;
+  output.innerHTML = "";
+  profileEl.innerHTML = "";
+  rateEl.textContent = "";
+  resetSteps();
+  caseIdEl.textContent = `REF: ${user.toUpperCase()}-${Date.now().toString().slice(-5)}`;
+
+  const emails = new Map();
+
+  try {
+    setStep(1, 'active');
+    status.textContent = "Consultando perfil...";
+    const userRes = await fetch(`https://api.github.com/users/${user}`);
+    updateRate(userRes);
+    if (userRes.status === 404) {
+      status.textContent = "";
+      output.innerHTML = '<span class="empty-msg">Usuario no encontrado.</span>';
+      setStep(1, null);
+      btn.disabled = false;
+      return;
+    }
+    if (userRes.status === 403) {
+      status.textContent = "";
+      output.innerHTML = '<span class="empty-msg">Límite de peticiones alcanzado. Espera al reset indicado abajo o usa un token autenticado.</span>';
+      btn.disabled = false;
+      return;
+    }
+    const userData = await userRes.json();
+    setStep(1, 'done');
+
+    profileEl.innerHTML = `
+      <div class="profile">
+        <img src="${userData.avatar_url}" alt="avatar">
+        <div>
+          <div class="name">${userData.name || userData.login}</div>
+          <div class="login">@${userData.login}${userData.company ? ' · ' + userData.company : ''}</div>
+        </div>
+      </div>`;
+
+    if (userData.email) addEmail(emails, userData.email, "Perfil público");
+
+    setStep(2, 'active');
+    status.textContent = "Escaneando eventos públicos...";
+    for (let page = 1; page <= 3; page++) {
+      const eventsRes = await fetch(`https://api.github.com/users/${user}/events/public?per_page=100&page=${page}`);
+      updateRate(eventsRes);
+      if (!eventsRes.ok) break;
+      const events = await eventsRes.json();
+      if (!Array.isArray(events) || events.length === 0) break;
+
+      events.forEach(event => {
+        if (event.type === "PushEvent" && event.payload?.commits) {
+          event.payload.commits.forEach(commit => {
+            if (commit.author?.email) {
+              addEmail(emails, commit.author.email, `Push a ${event.repo?.name || 'repo'}`);
+            }
+          });
+        }
+      });
+      if (events.length < 100) break;
+    }
+    setStep(2, 'done');
+
+    setStep(3, 'active');
+    status.textContent = "Revisando commits en repos públicos...";
+    const reposRes = await fetch(`https://api.github.com/users/${user}/repos?sort=pushed&per_page=5`);
+    updateRate(reposRes);
+    if (reposRes.ok) {
+      const repos = await reposRes.json();
+      if (Array.isArray(repos)) {
+        for (const repo of repos) {
+          if (repo.fork) continue;
+          const commitsRes = await fetch(`https://api.github.com/repos/${repo.full_name}/commits?author=${user}&per_page=5`);
+          updateRate(commitsRes);
+          if (!commitsRes.ok) continue;
+          const commits = await commitsRes.json();
+          if (!Array.isArray(commits)) continue;
+          commits.forEach(c => {
+            const email = c.commit?.author?.email;
+            if (email) addEmail(emails, email, `Commit en ${repo.name}`);
+          });
+        }
+      }
+    }
+    setStep(3, 'done');
+
+    status.textContent = `Consulta completada · ${emails.size} email(s) único(s)`;
+
+    if (emails.size === 0) {
+      output.innerHTML = '<span class="empty-msg">No se encontraron emails públicos, eventos recientes ni commits accesibles para este perfil.</span>';
+      btn.disabled = false;
+      return;
+    }
+
+    output.innerHTML = "";
+    for (const [email, sources] of emails.entries()) {
+      const isNoreply = email.includes("noreply.github.com") || email.includes("users.noreply");
+      const div = document.createElement("div");
+      div.className = "hit" + (isNoreply ? " noreply" : "");
+      div.innerHTML = `<span class="email">${email}</span>${isNoreply ? ' <span class="flag">· privado / no vinculable</span>' : ''}` +
+        `<span class="source">Fuente: ${[...sources].join(', ')}</span>`;
+      output.appendChild(div);
+    }
+
+  } catch (err) {
+    status.textContent = "";
+    output.innerHTML = `<span class="empty-msg">Error al conectar con la API de GitHub: ${err.message}</span>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>

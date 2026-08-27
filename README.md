@@ -4,8 +4,6 @@
 
 🔗 **Demo:** [https://s3gad3.github.io/rastro-gh/](https://s3gad3.github.io/rastro-gh/)
 
-> Nota: para que GitHub Pages sirva la herramienta en esa URL, el archivo debe llamarse `index.html` en la raíz del repo (renombra `rastro-gh.html` si aún no lo has hecho) y Pages debe estar activado en **Settings → Pages** (rama `main`, carpeta `/root`).
-
 ---
 
 ## ¿Qué hace?
@@ -52,4 +50,4 @@ Esta herramienta consulta exclusivamente información que el propio usuario de G
 
 ## Licencia
 
-Añade aquí la licencia que corresponda (MIT, uso interno, etc.).
+Este proyecto se distribuye bajo la licencia MIT.

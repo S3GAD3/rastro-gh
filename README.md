@@ -14,7 +14,7 @@
 </div>
 
 ---
-
+## Enlace a la herramienta: https://s3gad3.github.io/rastro-gh/
 ## ¿Qué es esto?
 
 **RASTRO-GH** parte de un dato mínimo —un **nombre de usuario de GitHub**— y reconstruye alrededor de él una pequeña ficha de inteligencia: quién es la cuenta, qué correos ha dejado expuestos sin darse cuenta, y por dónde seguir tirando del hilo.

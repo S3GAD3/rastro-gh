@@ -333,6 +333,17 @@
   .email-pivot-user button{margin-left:auto;padding:7px 10px;border:1px solid var(--rastro-blue);background:#fff;color:var(--rastro-blue);font-size:10px;font-weight:700;cursor:pointer;border-radius:3px}
   @media(max-width:900px){body{padding-top:70px}.wrap{margin-left:0;padding:72px 14px 28px}.side-nav{top:70px;bottom:auto;width:100%;height:54px;display:flex;overflow-x:auto;padding:6px 8px;border-right:0;border-bottom:1px solid #163d66}.side-nav a{flex:0 0 auto;border-left:0;border-bottom:3px solid transparent;padding:10px 14px}.side-nav a.active{border-left:0;border-bottom-color:#7ec5ff}header{height:70px;padding:7px 12px}.badge{width:120px}.badge img{width:120px;height:66px}.system-meta .local{display:none}.unit-eyebrow{display:none}.stamp-grid{grid-template-columns:repeat(3,minmax(110px,1fr))}}
   @media(max-width:600px){.unit-name{font-size:14px}.system-meta .version{display:none}.meta-chip{font-size:8px;padding:5px}.wrap{padding-left:9px;padding-right:9px}.file{padding:15px 11px}.input-group{flex-direction:column;align-items:stretch;margin-top:25px}.stamp-action{width:100%}.profile-card{flex-direction:column}.profile-avatar-wrap{align-self:flex-start}.profile-grid{grid-template-columns:1fr}.profile-grid .fitem.full{grid-column:auto}.profile-stats{flex-wrap:wrap}.stamp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hit-head{display:block}.pivot-toggle{width:100%;margin-top:9px}.modal-actions{flex-direction:column}.modal-actions>*{width:100%}}
+
+  .scan-options{display:grid;grid-template-columns:180px 1fr;gap:10px 12px;margin:8px 0 16px;padding:12px;background:var(--rastro-soft);border:1px solid var(--rastro-border)}
+  .scan-options label{display:flex;flex-direction:column;gap:5px}.scan-options label>span{font:700 9px Consolas,"Courier New",monospace;letter-spacing:.08em;color:var(--rastro-muted)}
+  .scan-options select,.scan-options input{width:100%;padding:10px 11px;border:1px solid #98a8b8;border-radius:3px;background:#fff;color:var(--rastro-text);font:12px Consolas,"Courier New",monospace}
+  .token-note{grid-column:1/-1;font-size:10px;color:var(--rastro-muted);line-height:1.45}.token-note strong{color:var(--rastro-navy)}
+  .scan-summary{display:grid;grid-template-columns:repeat(5,minmax(90px,1fr));gap:8px;margin:14px 0}.scan-stat{background:#fff;border:1px solid var(--rastro-border);border-top:3px solid var(--rastro-blue);padding:10px}.scan-stat b{display:block;font-size:17px;color:var(--rastro-navy)}.scan-stat span{font:700 8.5px Consolas,monospace;color:var(--rastro-muted);letter-spacing:.05em}
+  .rate-budget{display:grid;grid-template-columns:1.4fr repeat(3,minmax(105px,.7fr));gap:8px;margin:10px 0 14px}.rate-budget .budget-main,.rate-budget .budget-cell{background:#f8fafc;border:1px solid var(--rastro-border);padding:10px 12px}.rate-budget .budget-main{border-left:4px solid var(--rastro-blue)}.rate-budget b{display:block;color:var(--rastro-navy);font-size:15px}.rate-budget span{display:block;margin-top:3px;font:700 8.5px Consolas,monospace;color:var(--rastro-muted);letter-spacing:.045em}.rate-budget .warn b{color:#8a4b00}.rate-budget .stop b{color:#8a1c1c}.results-priority{margin-top:10px}.results-priority:before{content:"CORREOS LOCALIZADOS";display:block;margin:0 0 8px;font:800 10px Consolas,monospace;letter-spacing:.08em;color:var(--rastro-navy)}
+  .result-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.result-actions button{border:1px solid var(--rastro-blue);background:#fff;color:var(--rastro-blue);padding:8px 10px;border-radius:3px;font-size:10px;font-weight:700;cursor:pointer}.result-actions button:hover{background:#e8f3fc}
+  .hit .evidence-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.evidence-tag{display:inline-block;padding:2px 5px;border:1px solid #ccd5dd;background:#fff;color:var(--rastro-muted);font-size:9px}.confidence{font-weight:700}.confidence.high{color:var(--rastro-success)}.confidence.medium{color:var(--rastro-warning)}.confidence.low{color:var(--rastro-muted)}
+  .evidence-list{margin:8px 0 0;padding:0;list-style:none;font-size:9.5px;color:var(--rastro-muted)}.evidence-list li{padding:3px 0;border-top:1px dotted #d9dfe5}.evidence-list a{color:var(--rastro-blue);text-decoration:none}
+  @media(max-width:600px){.scan-options{grid-template-columns:1fr}.token-note{grid-column:auto}.scan-summary{grid-template-columns:repeat(2,1fr)}.rate-budget{grid-template-columns:1fr 1fr}.rate-budget .budget-main{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -350,7 +361,7 @@
     <div class="system-meta">
       <span class="meta-chip ok">SISTEMA OPERATIVO</span>
       <span class="meta-chip local">ANÁLISIS LOCAL</span>
-      <span class="meta-chip version">VERSIÓN 2.0</span>
+      <span class="meta-chip version">VERSIÓN 3.3</span>
     </div>
   </header>
 
@@ -362,7 +373,7 @@
   </nav>
 
   <h1 class="tool-title" id="consulta">RASTRO · GH</h1>
-  <p class="tool-sub">Localización de emails asociados a una cuenta de GitHub (perfil, eventos, commits) y pivote manual sobre ese usuario y esos correos en más de 30 plataformas y servicios OSINT.</p>
+  <p class="tool-sub">Arqueología de identidad GitHub: perfil, eventos, repositorios, forks, commits históricos y contribuciones externas. Correlaciona autor/committer, conserva evidencias y permite pivotar sobre los correos localizados.</p>
 
   <div class="file" id="resultados">
     <div class="tape left"></div>
@@ -377,24 +388,38 @@
     </div>
 
     <div class="input-group">
-      <input type="text" id="username" placeholder="usuario de GitHub (ej. torvalds)" onkeydown="if(event.key==='Enter') searchEmail()">
-      <button class="stamp-action" id="searchBtn" onclick="searchEmail()">Buscar</button>
+      <input type="text" id="username" placeholder="usuario de GitHub (ej. torvalds)" autocomplete="off" autocapitalize="none" spellcheck="false">
+      <button type="button" class="stamp-action" id="searchBtn">Investigar</button>
+    </div>
+
+    <div class="scan-options">
+      <label><span>PROFUNDIDAD</span><select id="scanDepth"><option value="quick">Rápida</option><option value="deep" selected>Profunda</option><option value="max">Máxima</option></select></label>
+      <label class="token-field"><span>TOKEN GITHUB · OPCIONAL</span><input type="password" id="githubToken" placeholder="ghp_… / github_pat_…" autocomplete="off"></label>
+      <div class="token-note">El token es opcional y solo se mantiene en memoria durante esta pestaña; se envía exclusivamente a <strong>api.github.com</strong>. Mejora el límite de peticiones para análisis profundos.</div>
     </div>
 
     <div class="pipeline">
       <div class="step" id="step1">1 · Perfil</div>
-      <div class="step" id="step2">2 · Eventos</div>
-      <div class="step" id="step3">3 · Commits</div>
+      <div class="step" id="step2">2 · Descubrir</div>
+      <div class="step" id="step3">3 · Profundizar</div>
+      <div class="step" id="step4">4 · Cerrar</div>
     </div>
 
     <div id="status" class="status"></div>
     <div id="profile"></div>
+    <div id="output" class="result-box results-priority"><span class="empty-msg">Introduce un usuario para iniciar la consulta...</span></div>
+    <div id="rateBudget"></div>
+    <div id="scanSummary"></div>
+    <div class="result-actions" id="resultActions" hidden>
+      <button type="button" onclick="exportResults('json')">Exportar JSON</button>
+      <button type="button" onclick="exportResults('csv')">Exportar CSV</button>
+      <button type="button" onclick="copySummary()">Copiar resumen</button>
+    </div>
     <div id="platformPivot"></div>
-    <div id="output" class="result-box"><span class="empty-msg">Introduce un usuario para iniciar la consulta...</span></div>
     <div id="rate" class="rate"></div>
   </div>
 
-  <footer id="fuentes">Consulta endpoints públicos de api.github.com · el resto de plataformas se abren en pestaña nueva para verificación manual · sin backend, sin claves API · uso interno autorizado<br><span id="ayuda">Los datos se procesan en el navegador. Las fuentes externas solo se abren por acción expresa del investigador.</span></footer>
+  <footer id="fuentes">Consulta fuentes públicas de GitHub mediante api.github.com · análisis local en navegador · token opcional solo para ampliar cuota · sin backend propio · uso autorizado<br><span id="ayuda">Los datos se procesan en el navegador. Las fuentes externas solo se abren por acción expresa del investigador.</span></footer>
 </div>
 
 <div class="creator-credit">CREADO POR S3GAD3</div>
@@ -465,7 +490,7 @@ const profileEl = document.getElementById('profile');
 const platformPivotEl = document.getElementById('platformPivot');
 const rateEl = document.getElementById('rate');
 const caseIdEl = document.getElementById('caseId');
-const steps = { 1: document.getElementById('step1'), 2: document.getElementById('step2'), 3: document.getElementById('step3') };
+const steps = { 1: document.getElementById('step1'), 2: document.getElementById('step2'), 3: document.getElementById('step3'), 4: document.getElementById('step4') };
 const imgModal = document.getElementById('imgModal');
 const modalImg = document.getElementById('modalImg');
 const modalLabel = document.getElementById('modalLabel');
@@ -476,22 +501,107 @@ let currentImgUrl = "";
 let currentImgLabel = "";
 
 function setStep(n, state) { steps[n].classList.remove('active', 'done'); if (state) steps[n].classList.add(state); }
-function resetSteps() { [1,2,3].forEach(n => { steps[n].classList.remove('active','done'); }); }
+function resetSteps() { [1,2,3,4].forEach(n => { steps[n].classList.remove('active','done'); }); }
 
+const rateState = {
+  core: {limit:null, remaining:null, reset:null},
+  search: {limit:null, remaining:null, reset:null},
+  requests: 0,
+  stoppedForBudget: false
+};
+function resetRateState() {
+  rateState.core = {limit:null, remaining:null, reset:null};
+  rateState.search = {limit:null, remaining:null, reset:null};
+  rateState.requests = 0;
+  rateState.stoppedForBudget = false;
+  renderRateBudget();
+}
+function formatReset(epoch) {
+  return epoch ? new Date(Number(epoch)*1000).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}) : '—';
+}
 function updateRate(res) {
+  const resource = (res.headers.get('x-ratelimit-resource') || 'core').toLowerCase();
+  const bucket = resource.includes('search') ? 'search' : 'core';
+  const limit = res.headers.get('x-ratelimit-limit');
   const remaining = res.headers.get('x-ratelimit-remaining');
   const reset = res.headers.get('x-ratelimit-reset');
-  if (remaining !== null) {
-    const resetDate = reset ? new Date(parseInt(reset,10)*1000).toLocaleTimeString() : '?';
-    rateEl.textContent = `Rate limit restante: ${remaining} · reset ${resetDate}`;
-  }
+  if (limit !== null) rateState[bucket].limit = Number(limit);
+  if (remaining !== null) rateState[bucket].remaining = Number(remaining);
+  if (reset !== null) rateState[bucket].reset = Number(reset);
+  rateState.requests++;
+  renderRateBudget();
 }
-function addEmail(map, email, source) {
+function renderRateBudget(message='') {
+  const box = document.getElementById('rateBudget');
+  if (!box) return;
+  const c=rateState.core, q=rateState.search;
+  const token=!!document.getElementById('githubToken')?.value.trim();
+  const rem=c.remaining;
+  const cls=rem !== null && rem <= 8 ? 'stop' : rem !== null && rem <= 15 ? 'warn' : '';
+  const strategy = token ? 'Autenticada · profundidad adaptativa' : 'Sin token · ahorro de cuota activado';
+  box.innerHTML=`<div class="rate-budget">
+    <div class="budget-main ${cls}"><b>${esc(message || strategy)}</b><span>ESTRATEGIA DE CONSUMO</span></div>
+    <div class="budget-cell ${cls}"><b>${c.remaining ?? '—'} / ${c.limit ?? '—'}</b><span>API CORE · RESET ${formatReset(c.reset)}</span></div>
+    <div class="budget-cell"><b>${q.remaining ?? '—'} / ${q.limit ?? '—'}</b><span>API SEARCH · RESET ${formatReset(q.reset)}</span></div>
+    <div class="budget-cell"><b>${rateState.requests}</b><span>PETICIONES ESTA CONSULTA</span></div>
+  </div>`;
+  if (rateEl) rateEl.textContent = c.remaining === null ? '' : `GitHub API · core restante ${c.remaining}/${c.limit ?? '?'} · search ${q.remaining ?? '?'}/${q.limit ?? '?'}`;
+}
+async function loadRateStatus(signal) {
+  try {
+    const res=await fetch('https://api.github.com/rate_limit',{headers:githubHeaders(),signal});
+    if (!res.ok) return;
+    const data=await res.json();
+    for (const key of ['core','search']) {
+      const r=data.resources?.[key];
+      if (r) rateState[key]={limit:r.limit,remaining:r.remaining,reset:r.reset};
+    }
+    renderRateBudget();
+  } catch(e) { if (e?.name !== 'AbortError') console.warn('RASTRO-GH: no se pudo leer rate_limit',e); }
+}
+function coreBudgetAvailable(reserve=8) {
+  return rateState.core.remaining === null || rateState.core.remaining > reserve;
+}
+function searchBudgetAvailable(reserve=2) {
+  return rateState.search.remaining === null || rateState.search.remaining > reserve;
+}
+function isNoreplyEmail(email) {
+  return /(?:^|@)(?:users\.)?noreply\.github\.com$/i.test(String(email || ''));
+}
+function addEmail(map, email, evidence = {}) {
   if (!email) return;
   const normalized = String(email).trim().toLowerCase();
   if (!normalized || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) return;
-  if (!map.has(normalized)) map.set(normalized, new Set());
-  map.get(normalized).add(source);
+  if (!map.has(normalized)) map.set(normalized, {
+    email: normalized, sources: new Set(), roles: new Set(), names: new Set(), repos: new Set(),
+    urls: new Set(), dates: [], count: 0, linked: 0, indirect: 0
+  });
+  const rec = map.get(normalized);
+  rec.count++;
+  if (evidence.source) rec.sources.add(evidence.source);
+  if (evidence.role) rec.roles.add(evidence.role);
+  if (evidence.name) rec.names.add(evidence.name);
+  if (evidence.repo) rec.repos.add(evidence.repo);
+  if (evidence.url) rec.urls.add(evidence.url);
+  if (evidence.date) rec.dates.push(evidence.date);
+  if (evidence.linked === true) rec.linked++;
+  else if (evidence.linked === false) rec.indirect++;
+}
+function confidenceFor(rec) {
+  if (isNoreplyEmail(rec.email)) return {label:'NOREPLY', cls:'low'};
+  let score = 0;
+  if (rec.linked > 0) score += 3;
+  if (rec.repos.size >= 2) score += 2;
+  if (rec.count >= 3) score += 1;
+  if (rec.roles.has('author')) score += 1;
+  if (rec.sources.has('Perfil público')) score += 4;
+  return score >= 5 ? {label:'ALTA', cls:'high'} : score >= 2 ? {label:'MEDIA', cls:'medium'} : {label:'BAJA', cls:'low'};
+}
+function isoMinMax(dates) {
+  const clean = dates.filter(Boolean).map(d => new Date(d)).filter(d => !isNaN(d));
+  if (!clean.length) return {first:null,last:null};
+  clean.sort((a,b)=>a-b);
+  return {first:clean[0].toISOString(), last:clean[clean.length-1].toISOString()};
 }
 function esc(s) {
   if (s === null || s === undefined) return '';
@@ -739,146 +849,398 @@ function pivotEmailLocalPart(email) {
 let pivotCounter = 0;
 function togglePivot(id) { document.getElementById(id).classList.toggle('open'); }
 
-function renderEmailHit(email, sources) {
-  const isNoreply = email.includes("noreply.github.com") || email.includes("users.noreply");
+function renderEmailHit(email, rec) {
+  const isNoreply = isNoreplyEmail(email);
   const div = document.createElement("div");
   div.className = "hit" + (isNoreply ? " noreply" : "");
+  const conf = confidenceFor(rec);
+  const range = isoMinMax(rec.dates);
+  const sourceText = [...rec.sources].join(', ') || 'GitHub';
+  const tags = [
+    `<span class="evidence-tag confidence ${conf.cls}">CONFIANZA ${conf.label}</span>`,
+    `<span class="evidence-tag">${rec.count} evidencia(s)</span>`,
+    rec.repos.size ? `<span class="evidence-tag">${rec.repos.size} repo(s)</span>` : '',
+    rec.roles.size ? `<span class="evidence-tag">${[...rec.roles].join(' / ')}</span>` : '',
+    range.first ? `<span class="evidence-tag">${fmtDate(range.first)} → ${fmtDate(range.last)}</span>` : ''
+  ].filter(Boolean).join('');
+  const names = rec.names.size ? `<span class="source">Nombres Git: ${esc([...rec.names].join(' · '))}</span>` : '';
+  const urls = [...rec.urls].slice(0,8).map((u,i)=>`<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">Evidencia ${i+1} ↗</a></li>`).join('');
 
   if (isNoreply) {
-    div.innerHTML = `<span class="email">${esc(email)}</span> <span class="flag">· privado / no vinculable</span>` +
-      `<span class="source">Fuente: ${esc([...sources].join(', '))}</span>`;
-    output.appendChild(div);
-    return;
+    div.innerHTML = `<span class="email">${esc(email)}</span> <span class="flag">· identificador GitHub noreply</span>
+      <span class="source">Fuente: ${esc(sourceText)}</span>${names}<div class="evidence-row">${tags}</div>${urls?`<ul class="evidence-list">${urls}</ul>`:''}`;
+    output.appendChild(div); return;
   }
 
   const panelId = `pivot-${pivotCounter++}`;
   const gravId = `grav-${pivotCounter}`;
   div.innerHTML = `
-    <div class="hit-head">
-      <div>
-        <span class="email">${esc(email)}</span>
-        <span class="source">Fuente: ${esc([...sources].join(', '))}</span>
-      </div>
-      <button class="pivot-toggle" onclick="togglePivot('${panelId}')">Pivotar ▾</button>
-    </div>
+    <div class="hit-head"><div><span class="email">${esc(email)}</span><span class="source">Fuente: ${esc(sourceText)}</span>${names}<div class="evidence-row">${tags}</div></div>
+      <button class="pivot-toggle" onclick="togglePivot('${panelId}')">Evidencias / pivotar ▾</button></div>
     <div class="pivot-panel" id="${panelId}">
-      <div class="email-pivot-user"><span>● INFORMACIÓN · Posible username derivado: <strong>${esc(email.split('@')[0])}</strong></span><button type="button" data-email="${esc(email)}" onclick="pivotEmailLocalPart(this.dataset.email)">INVESTIGAR COMO USERNAME</button></div>
+      ${urls?`<ul class="evidence-list" style="width:100%">${urls}</ul>`:''}
+      <div class="email-pivot-user"><span>● POSIBLE USERNAME: <strong>${esc(email.split('@')[0])}</strong></span><button type="button" data-email="${esc(email)}" onclick="pivotEmailLocalPart(this.dataset.email)">INVESTIGAR</button></div>
       ${buildPivotLinks(email).map(p => `<a class="pivot-link" href="${p.url}" target="_blank" rel="noopener noreferrer">${esc(p.label)}</a>`).join('')}
       <div class="grav-check" id="${gravId}"><span class="grav-none">Comprobando imagen Gravatar…</span></div>
-      <div class="pivot-note">Gravatar puede revelar nombre y foto reales vinculados a este email. HIBP y Epieos requieren pegar el email en su buscador (no permiten enlace directo desde fuera).</div>
+      <div class="pivot-note">La asociación se basa en metadatos públicos de Git. Revisa siempre la evidencia: author, committer y cuenta GitHub asociada pueden representar personas distintas.</div>
     </div>`;
   output.appendChild(div);
   checkGravatarImage(email, document.getElementById(gravId));
 }
+function renderEmailResults(emails) {
+  if (!output) return;
+  const ordered = [...emails.entries()].sort((a,b) => {
+    const an=isNoreplyEmail(a[0]), bn=isNoreplyEmail(b[0]);
+    if (an !== bn) return an ? 1 : -1;
+    const ac=confidenceFor(a[1]), bc=confidenceFor(b[1]);
+    const rank={ALTA:3,MEDIA:2,BAJA:1,NOREPLY:0};
+    return (rank[bc.label]-rank[ac.label]) || (b[1].count-a[1].count);
+  });
+  if (!ordered.length) {
+    output.innerHTML='<span class="empty-msg">Aún no se han localizado correos públicos asociados en las fuentes consultadas.</span>';
+    return;
+  }
+  output.innerHTML='';
+  pivotCounter=0;
+  ordered.forEach(([email,rec]) => renderEmailHit(email,rec));
+}
 
 /* ---------- Flujo principal ---------- */
-async function searchEmail() {
-  const user = document.getElementById('username').value.trim();
-  if (!user) return;
+let lastInvestigation = null;
+let activeSearch = null;
+let searchSequence = 0;
 
-  btn.disabled = true;
-  output.innerHTML = "";
-  profileEl.innerHTML = "";
-  platformPivotEl.innerHTML = "";
-  rateEl.textContent = "";
-  resetSteps();
-  caseIdEl.textContent = `REF: ${user.toUpperCase()}-${Date.now().toString().slice(-5)}`;
+function githubHeaders() {
+  const token = document.getElementById('githubToken').value.trim();
+  const h = {'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2026-03-10'};
+  if (token) h['Authorization'] = `Bearer ${token}`;
+  return h;
+}
+function hasGithubToken() { return !!document.getElementById('githubToken')?.value.trim(); }
+async function ghFetch(url, signal) {
+  const res = await fetch(url, {headers: githubHeaders(), signal});
+  updateRate(res);
+  return res;
+}
+function depthConfig() {
+  const mode = document.getElementById('scanDepth').value;
+  const token = hasGithubToken();
+  if (!token) {
+    return mode === 'quick' ? {mode, repoPages:1, commitPages:1, globalPages:1, maxRepos:5, reserveCore:10, eventPages:1}
+         : mode === 'max'   ? {mode, repoPages:1, commitPages:1, globalPages:3, maxRepos:20, reserveCore:8, eventPages:1}
+                            : {mode, repoPages:1, commitPages:1, globalPages:2, maxRepos:12, reserveCore:8, eventPages:1};
+  }
+  return mode === 'quick' ? {mode, repoPages:1, commitPages:1, globalPages:1, maxRepos:20, reserveCore:20, eventPages:1}
+       : mode === 'max'   ? {mode, repoPages:10, commitPages:3, globalPages:10, maxRepos:500, reserveCore:50, eventPages:3}
+                          : {mode, repoPages:3, commitPages:2, globalPages:3, maxRepos:120, reserveCore:30, eventPages:2};
+}
+function linkedToUser(c, user, role) {
+  const obj = role === 'committer' ? c.committer : c.author;
+  return !!obj?.login && obj.login.toLowerCase() === user.toLowerCase();
+}
+function harvestCommit(emails, c, repoName, sourceLabel, user, expectedRole='author') {
+  if (!c?.commit) return;
+  const url = c.html_url || '';
+  const a = c.commit.author;
+  const cm = c.commit.committer;
+  const authorLinked = linkedToUser(c,user,'author');
+  const committerLinked = linkedToUser(c,user,'committer');
 
-  const emails = new Map();
-
-  try {
-    setStep(1, 'active');
-    status.textContent = "Consultando perfil...";
-    const userRes = await fetch(`https://api.github.com/users/${user}`);
-    updateRate(userRes);
-    if (userRes.status === 404) {
-      status.textContent = "";
-      output.innerHTML = '<span class="empty-msg">No existe esa cuenta en GitHub — sin perfil ni commits que rastrear ahí. Aun así, el nombre de usuario puede existir en otras plataformas: revisa el bloque de abajo.</span>';
-      setStep(1, null);
-      renderPlatformPivot(user);
-      btn.disabled = false;
-      return;
-    }
-    if (userRes.status === 403) {
-      status.textContent = "";
-      output.innerHTML = '<span class="empty-msg">Límite de peticiones alcanzado. Espera al reset indicado abajo o usa un token autenticado. Mientras tanto, puedes pivotar el nombre de usuario en el resto de plataformas más abajo.</span>';
-      renderPlatformPivot(user);
-      btn.disabled = false;
-      return;
-    }
-    const userData = await userRes.json();
-    setStep(1, 'done');
-
-    renderProfile(userData);
-    renderPlatformPivot(userData.login || user);
-
-    if (userData.email) addEmail(emails, userData.email, "Perfil público");
-
-    setStep(2, 'active');
-    status.textContent = "Escaneando eventos públicos...";
-    for (let page = 1; page <= 3; page++) {
-      const eventsRes = await fetch(`https://api.github.com/users/${user}/events/public?per_page=100&page=${page}`);
-      updateRate(eventsRes);
-      if (!eventsRes.ok) break;
-      const events = await eventsRes.json();
-      if (!Array.isArray(events) || events.length === 0) break;
-
-      events.forEach(event => {
-        if (event.type === "PushEvent" && event.payload?.commits) {
-          event.payload.commits.forEach(commit => {
-            if (commit.author?.email) {
-              addEmail(emails, commit.author.email, `Push a ${event.repo?.name || 'repo'}`);
-            }
-          });
-        }
-      });
-      if (events.length < 100) break;
-    }
-    setStep(2, 'done');
-
-    setStep(3, 'active');
-    status.textContent = "Revisando commits en repos públicos...";
-    const reposRes = await fetch(`https://api.github.com/users/${user}/repos?sort=pushed&per_page=5`);
-    updateRate(reposRes);
-    if (reposRes.ok) {
-      const repos = await reposRes.json();
-      if (Array.isArray(repos)) {
-        for (const repo of repos) {
-          if (repo.fork) continue;
-          const commitsRes = await fetch(`https://api.github.com/repos/${repo.full_name}/commits?author=${user}&per_page=5`);
-          updateRate(commitsRes);
-          if (!commitsRes.ok) continue;
-          const commits = await commitsRes.json();
-          if (!Array.isArray(commits)) continue;
-          commits.forEach(c => {
-            const email = c.commit?.author?.email;
-            if (email) addEmail(emails, email, `Commit en ${repo.name}`);
-          });
-        }
-      }
-    }
-    setStep(3, 'done');
-
-    status.textContent = `Consulta completada · ${emails.size} email(s) único(s)`;
-
-    if (emails.size === 0) {
-      output.innerHTML = '<span class="empty-msg">No se encontraron emails públicos, eventos recientes ni commits accesibles para este perfil.</span>';
-      btn.disabled = false;
-      return;
-    }
-
-    output.innerHTML = "";
-    for (const [email, sources] of emails.entries()) {
-      renderEmailHit(email, sources);
-    }
-
-  } catch (err) {
-    status.textContent = "";
-    output.innerHTML = `<span class="empty-msg">Error al conectar con la API de GitHub: ${err.message}</span>`;
-  } finally {
-    btn.disabled = false;
+  // En búsquedas por autor se atribuye el author al objetivo. El committer solo se incorpora
+  // si GitHub lo vincula expresamente con la misma cuenta, evitando correos de terceros.
+  if (expectedRole === 'author' || expectedRole === 'mixed') {
+    if (a?.email) addEmail(emails, a.email, {source:sourceLabel, role:'author', name:a.name, date:a.date, repo:repoName, url, linked:authorLinked || expectedRole === 'author'});
+    if (cm?.email && committerLinked) addEmail(emails, cm.email, {source:sourceLabel, role:'committer', name:cm.name, date:cm.date, repo:repoName, url, linked:true});
+  }
+  if (expectedRole === 'committer') {
+    if (cm?.email) addEmail(emails, cm.email, {source:sourceLabel, role:'committer', name:cm.name, date:cm.date, repo:repoName, url, linked:true});
+    if (a?.email && authorLinked) addEmail(emails, a.email, {source:sourceLabel, role:'author', name:a.name, date:a.date, repo:repoName, url, linked:true});
   }
 }
+async function fetchPaged(urlBase, pages, onPage, signal, isCurrent = () => true) {
+  for (let page=1; page<=pages; page++) {
+    if (signal?.aborted || !isCurrent()) return {status:0, stopped:true, aborted:true};
+    const join = urlBase.includes('?') ? '&' : '?';
+    const res = await ghFetch(`${urlBase}${join}per_page=100&page=${page}`, signal);
+    if (!isCurrent()) return {status:0, stopped:true, aborted:true};
+    if (!res.ok) return {status:res.status, stopped:true};
+    const data = await res.json();
+    if (!isCurrent()) return {status:0, stopped:true, aborted:true};
+    const items = Array.isArray(data) ? data : (data.items || []);
+    if (!items.length) break;
+    await onPage(items, page, data);
+    if (items.length < 100) break;
+  }
+  return {status:200, stopped:false};
+}
+function renderScanSummary(stats, emails) {
+  const real = [...emails.values()].filter(r=>!isNoreplyEmail(r.email)).length;
+  const noreply = emails.size-real;
+  document.getElementById('scanSummary').innerHTML = `<div class="scan-summary">
+    <div class="scan-stat"><b>${real}</b><span>EMAILS REALES</span></div><div class="scan-stat"><b>${noreply}</b><span>NOREPLY</span></div>
+    <div class="scan-stat"><b>${stats.repos}</b><span>REPOS REVISADOS</span></div><div class="scan-stat"><b>${stats.commits}</b><span>COMMITS ANALIZADOS</span></div>
+    <div class="scan-stat"><b>${stats.external}</b><span>COMMITS EXTERNOS</span></div></div>`;
+}
+function serialiseInvestigation() {
+  if (!lastInvestigation) return null;
+  return {...lastInvestigation, emails:[...lastInvestigation.emails.values()].map(r=>{
+    const range=isoMinMax(r.dates); return {email:r.email,noreply:isNoreplyEmail(r.email),confidence:confidenceFor(r).label,count:r.count,
+      sources:[...r.sources],roles:[...r.roles],names:[...r.names],repositories:[...r.repos],evidence_urls:[...r.urls],first_seen:range.first,last_seen:range.last};
+  })};
+}
+function exportResults(format) {
+  const data=serialiseInvestigation(); if(!data) return;
+  let body,mime,ext;
+  if(format==='csv') {
+    const rows=[['email','noreply','confidence','count','sources','roles','names','repositories','first_seen','last_seen']];
+    data.emails.forEach(r=>rows.push([r.email,r.noreply,r.confidence,r.count,r.sources.join(' | '),r.roles.join(' | '),r.names.join(' | '),r.repositories.join(' | '),r.first_seen||'',r.last_seen||'']));
+    const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"'; body=rows.map(row=>row.map(q).join(',')).join('\n'); mime='text/csv'; ext='csv';
+  } else { body=JSON.stringify(data,null,2); mime='application/json'; ext='json'; }
+  const blob=new Blob([body],{type:mime}); const u=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=u; a.download=`rastro-gh_${slug(data.username)}.${ext}`; a.click(); setTimeout(()=>URL.revokeObjectURL(u),2000);
+}
+async function copySummary() {
+  const data=serialiseInvestigation(); if(!data) return;
+  const real=data.emails.filter(e=>!e.noreply); const lines=[`RASTRO-GH · ${data.username}`,`Repos revisados: ${data.stats.repos} · commits analizados: ${data.stats.commits} · externos: ${data.stats.external}`,`Emails únicos: ${real.length}`];
+  real.forEach(e=>lines.push(`- ${e.email} · confianza ${e.confidence} · ${e.count} evidencia(s) · ${e.repositories.length} repo(s)`));
+  try { await navigator.clipboard.writeText(lines.join('\n')); status.textContent='Resumen copiado al portapapeles.'; } catch { status.textContent='No se pudo copiar automáticamente.'; }
+}
+
+async function searchEmail() {
+  const usernameEl = document.getElementById('username');
+  const searchBtnEl = document.getElementById('searchBtn');
+  const outputEl = document.getElementById('output');
+  const statusEl = document.getElementById('status');
+  const profileBoxEl = document.getElementById('profile');
+  const pivotBoxEl = document.getElementById('platformPivot');
+  const rateBoxEl = document.getElementById('rate');
+  const summaryEl = document.getElementById('scanSummary');
+  const actionsEl = document.getElementById('resultActions');
+  const caseBoxEl = document.getElementById('caseId');
+
+  if (!usernameEl || !searchBtnEl || !outputEl || !statusEl) {
+    console.error('RASTRO-GH: faltan elementos esenciales del DOM.');
+    return;
+  }
+
+  const user = usernameEl.value.trim().replace(/^@/, '');
+  if (!user || !/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/.test(user)) {
+    statusEl.textContent = 'Introduce un nombre de usuario GitHub válido.';
+    outputEl.innerHTML = '<span class="empty-msg">Formato de usuario no válido.</span>';
+    return;
+  }
+
+  // Una nueva consulta invalida y cancela inmediatamente cualquier búsqueda anterior.
+  if (activeSearch?.controller) activeSearch.controller.abort();
+  const searchId = ++searchSequence;
+  const controller = new AbortController();
+  const signal = controller.signal;
+  activeSearch = { id: searchId, controller, username: user };
+  const isCurrent = () => activeSearch?.id === searchId && !signal.aborted;
+
+  // Estado limpio: ningún dato de la consulta anterior debe sobrevivir.
+  lastInvestigation = null;
+  currentImgUrl = '';
+  currentImgLabel = '';
+  resetSteps();
+  closeImageModal();
+  searchBtnEl.disabled = false;
+  searchBtnEl.textContent = 'Nueva búsqueda';
+  statusEl.textContent = 'Iniciando consulta…';
+  outputEl.innerHTML = '<span class="empty-msg">Conectando con GitHub…</span>';
+  if (profileBoxEl) profileBoxEl.innerHTML = '';
+  if (pivotBoxEl) pivotBoxEl.innerHTML = '';
+  if (rateBoxEl) rateBoxEl.textContent = '';
+  const rateBudgetEl = document.getElementById('rateBudget');
+  if (rateBudgetEl) rateBudgetEl.innerHTML = '';
+  resetRateState();
+  if (summaryEl) summaryEl.innerHTML = '';
+  if (actionsEl) actionsEl.hidden = true;
+  if (caseBoxEl) caseBoxEl.textContent = `REF: ${user.toUpperCase()}-${Date.now().toString().slice(-5)}`;
+
+  const emails = new Map();
+  const stats = { repos:0, commits:0, external:0, forks:0, errors:0 };
+  const cfg = depthConfig();
+
+  try {
+    await loadRateStatus(signal);
+    if (!isCurrent()) return;
+    renderRateBudget(hasGithubToken() ? 'Token activo · cuota ampliada' : 'Modo ahorro · preservando cuota sin autenticar');
+    setStep(1,'active');
+    statusEl.textContent = 'Consultando perfil GitHub…';
+    const userRes = await ghFetch(`https://api.github.com/users/${encodeURIComponent(user)}`, signal);
+    if (!isCurrent()) return;
+
+    if (userRes.status === 404) {
+      outputEl.innerHTML = '<span class="empty-msg">No existe esa cuenta en GitHub. Se mantienen disponibles los pivotes por username.</span>';
+      renderPlatformPivot(user);
+      setStep(1,null);
+      return;
+    }
+    if (userRes.status === 401) throw new Error('Token GitHub no válido o sin autorización. Retíralo y vuelve a probar.');
+    if (userRes.status === 403 || userRes.status === 429) throw new Error('Límite de GitHub alcanzado. Usa un token opcional o espera al reset indicado.');
+    if (!userRes.ok) throw new Error(`GitHub respondió HTTP ${userRes.status}`);
+
+    const userData = await userRes.json();
+    if (!isCurrent()) return;
+    renderProfile(userData);
+    renderPlatformPivot(userData.login || user);
+    if (userData.email) addEmail(emails,userData.email,{source:'Perfil público',role:'profile',name:userData.name,linked:true});
+    renderEmailResults(emails);
+    setStep(1,'done');
+
+    setStep(2,'active');
+    statusEl.textContent = 'Descubriendo evidencias de alto rendimiento…';
+
+    // Eventos: una ventana corta y barata. Se considera indicio contextual, no vinculación fuerte.
+    if (coreBudgetAvailable(cfg.reserveCore)) {
+      await fetchPaged(`https://api.github.com/users/${encodeURIComponent(user)}/events/public`, cfg.eventPages, async events => {
+        if (!isCurrent()) return;
+        events.forEach(event => {
+          if (event.type === 'PushEvent' && event.payload?.commits) {
+            event.payload.commits.forEach(c => {
+              if (c.author?.email) addEmail(emails,c.author.email,{source:`PushEvent · ${event.repo?.name||'repo'}`,role:'author',name:c.author.name,repo:event.repo?.name,date:event.created_at,url:c.sha&&event.repo?.name?`https://github.com/${event.repo.name}/commit/${c.sha}`:'',linked:false});
+            });
+          }
+        });
+      }, signal, isCurrent);
+      renderEmailResults(emails);
+    }
+
+    // Búsqueda global primero: usa una cuota separada y descubre repos de terceros antes de gastar CORE.
+    const discoveredRepos = new Map();
+    if (searchBudgetAvailable(2)) {
+      for (let page=1; page<=cfg.globalPages; page++) {
+        if (!isCurrent() || !searchBudgetAvailable(1)) break;
+        const q = encodeURIComponent(`author:${user}`);
+        const res = await ghFetch(`https://api.github.com/search/commits?q=${q}&sort=author-date&order=desc&per_page=100&page=${page}`, signal);
+        if (!isCurrent()) return;
+        if (!res.ok) break;
+        const data = await res.json();
+        const items = data.items || [];
+        if (!items.length) break;
+        items.forEach(c => {
+          stats.commits++;
+          const repo = c.repository?.full_name || '';
+          if (repo) discoveredRepos.set(repo, {full_name:repo, fork:false, discovered:true});
+          const owned = repo.toLowerCase().startsWith(user.toLowerCase() + '/');
+          if (!owned) stats.external++;
+          harvestCommit(emails,c,repo,owned?'Búsqueda global · repo propio':'Búsqueda global · repo externo',user,'author');
+        });
+        renderEmailResults(emails);
+        if (items.length < 100) break;
+      }
+    }
+    setStep(2,'done');
+
+    setStep(3,'active');
+    statusEl.textContent = 'Profundizando solo donde compensa el consumo de API…';
+
+    // Enumeramos repos propios una sola vez y priorizamos primero los repos descubiertos por Search.
+    const repoMap = new Map(discoveredRepos);
+    if (coreBudgetAvailable(cfg.reserveCore)) {
+      await fetchPaged(`https://api.github.com/users/${encodeURIComponent(user)}/repos?type=all&sort=pushed&direction=desc`, cfg.repoPages, async items => {
+        for (const r of items) if (!repoMap.has(r.full_name)) repoMap.set(r.full_name,r);
+      }, signal, isCurrent);
+    }
+    const repos=[...repoMap.values()].slice(0,cfg.maxRepos);
+    let lastVisibleEmailCount=emails.size;
+
+    for (let i=0; i<repos.length; i++) {
+      if (!isCurrent()) return;
+      if (!coreBudgetAvailable(cfg.reserveCore)) {
+        rateState.stoppedForBudget=true;
+        renderRateBudget(`Análisis detenido para preservar ${cfg.reserveCore} peticiones CORE`);
+        break;
+      }
+      const repo = repos[i];
+      stats.repos++;
+      if (repo.fork) stats.forks++;
+      statusEl.textContent = `Profundización ${i+1}/${repos.length} · ${repo.full_name} · ${emails.size} email(s)`;
+      const base = `https://api.github.com/repos/${repo.full_name}/commits?author=${encodeURIComponent(user)}`;
+      await fetchPaged(base, cfg.commitPages, async commits => {
+        stats.commits += commits.length;
+        commits.forEach(c => harvestCommit(emails,c,repo.full_name,repo.fork?'Commit en fork':'Commit dirigido',user,'author'));
+      }, signal, isCurrent);
+      if (emails.size !== lastVisibleEmailCount) { renderEmailResults(emails); lastVisibleEmailCount=emails.size; }
+
+      if (cfg.mode === 'max' && hasGithubToken() && coreBudgetAvailable(cfg.reserveCore)) {
+        const cb = `https://api.github.com/repos/${repo.full_name}/commits?committer=${encodeURIComponent(user)}`;
+        await fetchPaged(cb, 1, async commits => {
+          stats.commits += commits.length;
+          commits.forEach(c => harvestCommit(emails,c,repo.full_name,'Committer vinculado',user,'committer'));
+        }, signal, isCurrent);
+        if (emails.size !== lastVisibleEmailCount) { renderEmailResults(emails); lastVisibleEmailCount=emails.size; }
+      }
+    }
+    setStep(3,'done');
+
+    setStep(4,'active');
+    statusEl.textContent = rateState.stoppedForBudget ? 'Cerrando análisis: cuota preservada.' : 'Consolidando evidencias y preparando resultados…';
+    renderEmailResults(emails);
+    setStep(4,'done');
+
+    lastInvestigation = {username:user,generated_at:new Date().toISOString(),mode:cfg.mode,stats:{...stats,api_requests:rateState.requests,stopped_for_budget:rateState.stoppedForBudget},emails};
+    renderScanSummary(stats,emails);
+    if (actionsEl) actionsEl.hidden = false;
+
+    statusEl.textContent = `Consulta completada · ${emails.size} email(s) único(s) · ${stats.repos} repos · ${stats.commits} commits${rateState.stoppedForBudget ? ' · detenida antes de agotar cuota' : ''}`;
+    if (!emails.size) {
+      outputEl.innerHTML = '<span class="empty-msg">No se localizaron emails públicos en las fuentes consultadas. Esto no demuestra que la cuenta carezca de direcciones históricas; puede existir información fuera de la ventana/API disponible.</span>';
+      return;
+    }
+    renderEmailResults(emails);
+  } catch (err) {
+    if (err?.name === 'AbortError' || !isCurrent()) return;
+    statusEl.textContent = '';
+    outputEl.innerHTML = `<span class="empty-msg">Error: ${esc(err.message)}</span>`;
+  } finally {
+    if (activeSearch?.id === searchId) {
+      activeSearch = null;
+      searchBtnEl.disabled = false;
+      searchBtnEl.textContent = 'Investigar';
+    }
+  }
+}
+
+/* ---------- Activación robusta de la consulta ---------- */
+function bindRastroGhControls() {
+  const searchBtnEl = document.getElementById('searchBtn');
+  const usernameEl = document.getElementById('username');
+  if (!searchBtnEl || !usernameEl) {
+    console.error('RASTRO-GH: no se pudieron enlazar los controles de búsqueda.');
+    return;
+  }
+  if (!searchBtnEl.dataset.bound) {
+    searchBtnEl.addEventListener('click', (event) => {
+      event.preventDefault();
+      searchEmail().catch(err => {
+        console.error('RASTRO-GH: error no controlado', err);
+        const st = document.getElementById('status');
+        const out = document.getElementById('output');
+        if (st) st.textContent = 'Error durante la consulta.';
+        if (out) out.innerHTML = `<span class="empty-msg">Error inesperado: ${esc(err?.message || err)}</span>`;
+        searchBtnEl.disabled = false;
+        searchBtnEl.textContent = 'Investigar';
+      });
+    });
+    usernameEl.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        searchBtnEl.click();
+      }
+    });
+    searchBtnEl.dataset.bound = '1';
+  }
+}
+
+// Compatibilidad con handlers externos y pruebas manuales desde consola.
+window.searchEmail = searchEmail;
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bindRastroGhControls, {once:true});
+} else {
+  bindRastroGhControls();
+}
+
 </script>
 
 </body>
